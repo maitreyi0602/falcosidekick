@@ -366,4 +366,8 @@ func forwardEvent(falcopayload types.FalcoPayload) {
 	if config.Redis.Address != "" && (falcopayload.Priority >= types.Priority(config.Redis.MinimumPriority) || falcopayload.Rule == testRule) {
 		go redisClient.RedisPost(falcopayload)
 	}
+
+	if config.OCI.ObjectStorage.Bucket != "" && (falcopayload.Priority >= types.Priority(config.OCI.ObjectStorage.MinimumPriority) || falcopayload.Rule == testRule) {
+		go ociClient.UploadToObjectStorage(falcopayload)
+	}
 }

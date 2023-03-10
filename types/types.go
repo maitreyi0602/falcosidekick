@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"expvar"
+	"github.com/embano1/memlog"
 	"text/template"
 	"time"
 
-	"github.com/embano1/memlog"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -98,6 +98,7 @@ type Configuration struct {
 	Spyderbat          SpyderbatConfig
 	TimescaleDB        TimescaleDBConfig
 	Redis              RedisConfig
+	OCI                ociOutputConfig
 }
 
 // SlackOutputConfig represents parameters for Slack
@@ -425,6 +426,23 @@ type gcpStorage struct {
 	MinimumPriority string
 }
 
+type ociOutputConfig struct {
+	Region        string
+	Tenancy       string
+	User          string
+	Fingerprint   string
+	PrivateKey    string
+	Passphrase    string
+	ObjectStorage ociObjectStorage
+}
+
+type ociObjectStorage struct {
+	Bucket           string
+	Namespace        string
+	ObjectNamePrefix string
+	MinimumPriority  string
+}
+
 // GooglechatConfig represents parameters for Google chat
 type GooglechatConfig struct {
 	WebhookURL            string
@@ -695,6 +713,7 @@ type Statistics struct {
 	Spyderbat         *expvar.Map
 	TimescaleDB       *expvar.Map
 	Redis             *expvar.Map
+	OCIObjectStorage  *expvar.Map
 }
 
 // PromStatistics is a struct to store prometheus metrics

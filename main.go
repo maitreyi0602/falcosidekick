@@ -65,6 +65,7 @@ var (
 	spyderbatClient     *outputs.Client
 	timescaleDBClient   *outputs.Client
 	redisClient         *outputs.Client
+	ociClient           *outputs.Client
 
 	statsdClient, dogstatsdClient *statsd.Client
 	config                        *types.Configuration
