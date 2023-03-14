@@ -664,6 +664,18 @@ func init() {
 		}
 	}
 
+	if config.OCI.ObjectStorage.Bucket != "" && config.OCI.ObjectStorage.Namespace != "" {
+		var err error
+		ociClient, err = outputs.NewOCIClient(config, stats, promStats, statsdClient, dogstatsdClient)
+		if err != nil {
+			log.Printf("Unable to create OCI Client due to error: %s\n", err.Error())
+		} else {
+			if config.OCI.ObjectStorage.Bucket != "" && config.OCI.ObjectStorage.Namespace != "" {
+				outputs.EnabledOutputs = append(outputs.EnabledOutputs, "OCIObjectStorage")
+			}
+		}
+	}
+
 	log.Printf("[INFO]  : Falco Sidekick version: %s\n", GetVersionInfo().GitVersion)
 	log.Printf("[INFO]  : Enabled Outputs : %s\n", outputs.EnabledOutputs)
 

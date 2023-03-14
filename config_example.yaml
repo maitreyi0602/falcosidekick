@@ -407,3 +407,16 @@ redis:
   # storagetype: "" # Redis storage type: hashmap or list (default: "list")
   # key: "" # Redis storage key name for hashmap, list(default: "falco")
   # minimumpriority: "" # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
+
+oci:
+  # region: ""
+  #	tenancy: ""
+  #	user: ""
+  #	fingerprint: ""
+  #	privateKey: ""
+  #	passphrase: ""
+  objectstorage:
+    # bucket: ""
+    # namespace: ""
+    # objectnameprefix: ""
+    # minimumpriority: "" # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)
