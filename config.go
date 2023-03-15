@@ -411,6 +411,10 @@ func getConfig() *types.Configuration {
 	v.SetDefault("Redis.MutualTls", false)
 	v.SetDefault("Redis.CheckCert", true)
 
+	v.SetDefault("OCI.ObjectStorage.Bucket", "")
+	v.SetDefault("OCI.ObjectStorage.Namespace", "falco")
+	v.SetDefault("OCI.ObjectStorage.ObjectNamePrefix", "")
+
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	v.AutomaticEnv()
 	if *configFile != "" {
@@ -596,6 +600,7 @@ func getConfig() *types.Configuration {
 	c.Gotify.MinimumPriority = checkPriority(c.Gotify.MinimumPriority)
 	c.TimescaleDB.MinimumPriority = checkPriority(c.TimescaleDB.MinimumPriority)
 	c.Redis.MinimumPriority = checkPriority(c.Redis.MinimumPriority)
+	c.OCI.ObjectStorage.MinimumPriority = checkPriority(c.OCI.ObjectStorage.MinimumPriority)
 
 	c.Slack.MessageFormatTemplate = getMessageFormatTemplate("Slack", c.Slack.MessageFormat)
 	c.Rocketchat.MessageFormatTemplate = getMessageFormatTemplate("Rocketchat", c.Rocketchat.MessageFormat)
