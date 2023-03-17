@@ -91,13 +91,9 @@ lint-full: $(GOLANGCI_LINT) ## Run slower linters to detect possible issues
 ## Release
 ## --------------------------------------
 
-.PHONY: goreleaser
-goreleaser: ## Release using goreleaser
-	LDFLAGS="$(LDFLAGS)" goreleaser release --rm-dist
-
 .PHONY: goreleaser-snapshot
 goreleaser-snapshot: ## Release snapshot using goreleaser
-	LDFLAGS="$(LDFLAGS)" goreleaser --snapshot --skip-sign --rm-dist
+	LDFLAGS="$(LDFLAGS)" goreleaser --snapshot --skip-sign --clean
 
 ## --------------------------------------
 ## Tooling Binaries

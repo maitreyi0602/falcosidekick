@@ -3,12 +3,12 @@ module github.com/falcosecurity/falcosidekick
 go 1.20
 
 require (
-	cloud.google.com/go/functions v1.9.0
+	cloud.google.com/go/functions v1.10.0
 	cloud.google.com/go/pubsub v1.27.1
 	cloud.google.com/go/storage v1.27.0
 	github.com/Azure/azure-event-hubs-go/v3 v3.3.18
 	github.com/DataDog/datadog-go v4.8.3+incompatible
-	github.com/PagerDuty/go-pagerduty v1.5.1
+	github.com/PagerDuty/go-pagerduty v1.6.0
 	github.com/aws/aws-sdk-go v1.44.217
 	github.com/cloudevents/sdk-go/v2 v2.11.0
 	github.com/eclipse/paho.mqtt.golang v1.4.2
@@ -20,10 +20,10 @@ require (
 	github.com/jackc/pgx/v5 v5.0.4
 	github.com/kubernetes-sigs/wg-policy-prototypes/policy-report/kube-bench-adapter v0.0.0-20210714174227-a3d56502c383
 	github.com/nats-io/nats.go v1.24.0
-	github.com/nats-io/stan.go v0.10.3
+	github.com/nats-io/stan.go v0.10.4
 	github.com/prometheus/client_golang v1.13.0
 	github.com/redis/go-redis/v9 v9.0.2
-	github.com/segmentio/kafka-go v0.4.38
+	github.com/segmentio/kafka-go v0.4.39
 	github.com/spf13/viper v1.15.0
 	github.com/streadway/amqp v1.0.0
 	github.com/stretchr/testify v1.8.1
@@ -35,7 +35,7 @@ require (
 	google.golang.org/genproto v0.0.0-20221227171554-f9683d7f8bef
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/api v0.25.0
-	k8s.io/apimachinery v0.25.0
+	k8s.io/apimachinery v0.26.2
 	k8s.io/client-go v11.0.0+incompatible
 )
 
@@ -152,9 +152,9 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	honnef.co/go/tools v0.3.3 // indirect
-	k8s.io/klog/v2 v2.70.1 // indirect
-	k8s.io/kube-openapi v0.0.0-20220803164354-a70c9af30aea // indirect
-	k8s.io/utils v0.0.0-20220823124924-e9cbc92d1a73 // indirect
+	k8s.io/klog/v2 v2.80.1 // indirect
+	k8s.io/kube-openapi v0.0.0-20221012153701-172d655c2280 // indirect
+	k8s.io/utils v0.0.0-20221107191617-1a15be271d1d // indirect
 	sigs.k8s.io/controller-runtime v0.12.3 // indirect
 	sigs.k8s.io/json v0.0.0-20220713155537-f223a00ba0e2 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
