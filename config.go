@@ -411,6 +411,12 @@ func getConfig() *types.Configuration {
 	v.SetDefault("Redis.MutualTls", false)
 	v.SetDefault("Redis.CheckCert", true)
 
+	v.SetDefault("OCI.Region", "")
+	v.SetDefault("OCI.Tenancy", "")
+	v.SetDefault("OCI.User", "")
+	v.SetDefault("OCI.Fingerprint", "")
+	v.SetDefault("OCI.PrivateKey", "")
+	v.SetDefault("OCI.Passphrase", "")
 	v.SetDefault("OCI.ObjectStorage.Bucket", "")
 	v.SetDefault("OCI.ObjectStorage.Namespace", "falco")
 	v.SetDefault("OCI.ObjectStorage.ObjectNamePrefix", "")

@@ -416,7 +416,7 @@ oci:
   #	privateKey: ""
   #	passphrase: ""
   objectstorage:
-    # bucket: ""
+    # bucket: "" # OCI Object Storage Bucket Name
     # namespace: ""
     # objectnameprefix: ""
     # minimumpriority: "" # minimum priority of event for using this output, order is emergency|alert|critical|error|warning|notice|informational|debug or "" (default)

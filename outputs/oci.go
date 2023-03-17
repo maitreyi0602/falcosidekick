@@ -7,10 +7,12 @@ import (
 	"fmt"
 	"github.com/DataDog/datadog-go/statsd"
 	"github.com/falcosecurity/falcosidekick/types"
-	"github.com/oracle/oci-go-sdk/v65/common"
-	"github.com/oracle/oci-go-sdk/v65/objectstorage"
+	"github.com/oracle/oci-go-sdk/common"
+	"github.com/oracle/oci-go-sdk/objectstorage"
 	"io"
 	"log"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -32,20 +34,30 @@ func (c *Client) UploadToObjectStorage(falcopayload types.FalcoPayload) {
 	prefix := ""
 	t := time.Now()
 	if c.Config.OCI.ObjectStorage.ObjectNamePrefix != "" {
-		prefix = c.Config.OCI.ObjectStorage.ObjectNamePrefix
+		prefix = strings.TrimSpace(c.Config.OCI.ObjectStorage.ObjectNamePrefix)
 	}
 
 	objectName := fmt.Sprintf("%s/%s/%s.json", prefix, t.Format("2006-01-02"), t.Format(time.RFC3339Nano))
 
 	request := objectstorage.PutObjectRequest{
-		BucketName:    common.String(c.Config.OCI.ObjectStorage.Bucket),
-		NamespaceName: common.String(c.Config.OCI.ObjectStorage.Namespace),
-		ObjectName:    common.String(objectName),
+		BucketName:    common.String(strings.TrimSpace(c.Config.OCI.ObjectStorage.Bucket)),
+		NamespaceName: common.String(strings.TrimSpace(c.Config.OCI.ObjectStorage.Namespace)),
+		ObjectName:    common.String(strings.TrimSpace(objectName)),
 		PutObjectBody: io.NopCloser(bytes.NewReader(f)),
+		ContentLength: common.Int64(int64(bytes.NewReader(f).Len())),
 	}
 
-	objStorageClient, err := objectstorage.NewObjectStorageClientWithConfigurationProvider(common.NewRawConfigurationProvider(c.Config.OCI.Tenancy, c.Config.OCI.User, c.Config.OCI.Region, c.Config.OCI.Fingerprint,
-		c.Config.OCI.PrivateKey, common.String(c.Config.OCI.Passphrase)))
+	privateKeyBytes, err := os.ReadFile(strings.TrimSpace(c.Config.OCI.PrivateKey))
+	if err != nil {
+		log.Printf("Error while reading Private Key from file [%v]", err.Error())
+	}
+	provider := common.NewRawConfigurationProvider(strings.TrimSpace(c.Config.OCI.Tenancy), strings.TrimSpace(c.Config.OCI.User), strings.TrimSpace(c.Config.OCI.Region), strings.TrimSpace(c.Config.OCI.Fingerprint),
+		string(privateKeyBytes), common.String(c.Config.OCI.Passphrase))
+
+	objStorageClient, err := objectstorage.NewObjectStorageClientWithConfigurationProvider(provider)
+	if err != nil {
+		log.Printf("Error while creating Object Storage Client [%v]", err.Error())
+	}
 
 	_, err = objStorageClient.PutObject(context.Background(), request)
 
